@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Acessar no Telegram — @familiadopecadobot</title>
+  <title>Acessar no Telegram</title>
   <meta name="robots" content="noindex,nofollow" />
 
   <style>
@@ -49,79 +49,26 @@
       <p class="muted" id="status">Se o app não abrir sozinho, toque no botão abaixo.</p>
 
       <div class="rows">
-        <button id="cta" class="cta">ACESSAR GRUPO 🥵</button>
+        <a id="cta" class="cta" href="https://t.me/+HbKfp7hjFA40NzMx">ACESSAR GRUPO 🥵</a>
 
         <div class="links">
-          <a id="httpsLink" class="linklike" href="#" rel="nofollow">Abrir no navegador</a>
-          <a id="chromeIntent" class="linklike" href="#" rel="nofollow">Abrir no Chrome (Android)</a>
+          <a class="linklike" href="https://t.me/+HbKfp7hjFA40NzMx" rel="nofollow">Abrir no navegador</a>
+          <a class="linklike" href="https://t.me/+HbKfp7hjFA40NzMx" rel="nofollow">Abrir no Chrome (Android)</a>
         </div>
       </div>
     </div>
   </div>
 
   <script>
-    /***** CONFIGURAÇÃO (já pronto p/ @familiadopecadobot?start=go) *****/
-    const USERNAME  = "familiadopecadobot";
-    const START_ARG = "go";
-    const IOS_DELAY_MS = 2500;
-    const ANDROID_DELAY_MS = 600;
-    const HTTPS_FALLBACK_DELAY_MS = 2600;
-    /***************************************************/
+    // Link único atualizado
+    const FINAL_LINK = "https://t.me/+HbKfp7hjFA40NzMx";
 
-    const tgDeepLink = `tg://resolve?domain=${USERNAME}&start=${START_ARG}`;
-    const httpsLink  = `https://t.me/${USERNAME}?start=${START_ARG}`;
-    const chromeIntent = `intent://t.me/${USERNAME}?start=${START_ARG}#Intent;scheme=https;package=com.android.chrome;end`;
+    // Redirecionamento automático
+    setTimeout(() => {
+      window.location.href = FINAL_LINK;
+    }, 800);
 
-    const ua = navigator.userAgent || "";
-    const isAndroid = /Android/i.test(ua);
-    const isIOS = /iPhone|iPad|iPod/i.test(ua);
-
-    document.getElementById("httpsLink").href = httpsLink;
-    document.getElementById("chromeIntent").href = chromeIntent;
-
-    if (!isAndroid) { document.getElementById("chromeIntent").style.display = "none"; }
-
-    let pageHidden = false;
-    const hideEvents = ["visibilitychange", "pagehide", "blur"];
-    hideEvents.forEach(evt => {
-      window.addEventListener(evt, () => { 
-        if (document.hidden || evt === "pagehide") pageHidden = true; 
-      }, {passive:true});
-    });
-
-    function tryOpenTelegram(withDelayMs) {      
-      const iframe = document.createElement("iframe");
-      iframe.style.display = "none";
-      iframe.src = tgDeepLink;
-      document.body.appendChild(iframe);
-      setTimeout(() => { window.location.href = tgDeepLink; }, Math.max(80, withDelayMs / 3));
-    }
-
-    function autoRedirect() {
-      const delay = isIOS ? IOS_DELAY_MS : ANDROID_DELAY_MS;
-      document.getElementById("status").textContent = isIOS
-        ? "iPhone detectado: aguardando um instante para evitar bloqueio do Safari…"
-        : "Abrindo o app do Telegram…";
-
-      setTimeout(() => { tryOpenTelegram(delay); }, delay);
-
-      setTimeout(() => {
-        if (!pageHidden) { window.location.href = httpsLink; }
-      }, HTTPS_FALLBACK_DELAY_MS);
-    }
-
-    document.getElementById("cta").addEventListener("click", (e) => {
-      e.preventDefault();
-      if (isAndroid) {
-        tryOpenTelegram(80);
-      } else if (isIOS) {
-        window.location.href = tgDeepLink;
-      } else {
-        window.location.href = httpsLink;
-      }
-    });
-
-    autoRedirect();
+    document.getElementById("status").textContent = "Abrindo o Telegram…";
   </script>
 </body>
 </html>
